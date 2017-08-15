@@ -462,29 +462,35 @@ void at_task_init(void)
     sprintf((char*)version, "compile time:%s %s", __DATE__, __TIME__);
     esp_at_device_ops_regist (&esp_at_device_ops);
     esp_at_custom_ops_regist(&esp_at_custom_ops);
-    esp_at_module_init (0, version);
+    esp_at_module_init (CONFIG_LWIP_MAX_SOCKETS - 1, version);  // reserved one for server
     free(version);
 
 #ifdef CONFIG_AT_BASE_COMMAND_SUPPORT
-    if(at_base_cmd_regist() == false) {
+    if(esp_at_base_cmd_regist() == false) {
         printf("regist base cmd fail\r\n");
     }
 #endif
 
 #ifdef CONFIG_AT_WIFI_COMMAND_SUPPORT
-    if(at_wifi_cmd_regist() == false) {
+    if(esp_at_wifi_cmd_regist() == false) {
         printf("regist wifi cmd fail\r\n");
     }
 #endif
 
 #ifdef CONFIG_AT_NET_COMMAND_SUPPORT
-    if(at_net_cmd_regist() == false) {
+    if(esp_at_net_cmd_regist() == false) {
         printf("regist net cmd fail\r\n");
     }
 #endif
 
 #ifdef CONFIG_AT_BLE_COMMAND_SUPPORT
-    if(at_ble_cmd_regist() == false) {
+    if(esp_at_ble_cmd_regist() == false) {
+        printf("regist ble cmd fail\r\n");
+    }
+#endif
+
+#ifdef CONFIG_AT_FS_COMMAND_SUPPORT
+    if(esp_at_fs_cmd_regist() == false) {
         printf("regist ble cmd fail\r\n");
     }
 #endif

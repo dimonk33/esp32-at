@@ -58,6 +58,16 @@ config AT_BLE_COMMAND_SUPPORT
     default "y"
     depends on AT_ENABLE
     
+config AT_FS_COMMAND_SUPPORT
+    bool "AT FS command support."
+    default "n"
+    depends on AT_ENABLE
+    
+config AT_OTA_BASED_UPON_SSL
+    bool "OTA based upon ssl"
+    default "n"
+    depends on AT_ENABLE
+
 config AT_OTA_SERVER_IP
     string "Server IP for AT OTA."
     default "iot.espressif.cn"
